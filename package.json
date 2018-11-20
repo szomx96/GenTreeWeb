@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "faker": "^4.1.0",
     "konva": "^2.5.1",
     "react": "^16.6.3",
+    "react-d3-library": "^1.1.8",
     "react-dom": "^16.6.3",
     "react-konva": "^16.6.31",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "scripts": {
     "start": "react-scripts start",

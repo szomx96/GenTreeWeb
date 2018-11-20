@@ -7,7 +7,6 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 import rd3 from 'react-d3-library'
 
 
-const tab = [Person, Person2, Person3];
 
 const persons = [];
 for(let i = 0; i < 10; i++){
@@ -18,20 +17,22 @@ for(let i = 0; i < 10; i++){
     birthDate: faker.date.past(),
     deathDate: faker.date.past(),
     avatar: faker.image.avatar(),
+    country: faker.address.country(),
+    city: faker.address.city(),
     desc: faker.lorem.sentence(),
     id: faker.random.number(),
   })
 }
 
 const CardTest = (props) => {
-  console.log(props.birthDate);
-  console.log(props.email);
   return(
   <Card>
     <Image src = {props.avatar} size="massive"/>
     <Card.Content>
       <Card.Header>{props.firstName} {props.lastName}</Card.Header>
       <Card.Meta>
+        <span>{props.country}</span><br />
+        <span>{props.city}</span>
         {/* <span className='date'>Birth date: {props.birthDate}</span> */}
         {/* {props.deathDate && <span className='date'>Death date: {props.deathDate}</span>} */}
       </Card.Meta>
@@ -39,7 +40,7 @@ const CardTest = (props) => {
     </Card.Content>
     <Card.Content extra>
       <a>
-        e-mail: {props.email}
+        <Icon name = 'mail'></Icon>{props.email}
       </a>
     </Card.Content>
   </Card>)
@@ -59,18 +60,11 @@ class App extends Component {
                                          desc={person.desc}
                                          birthDate={person.birthDate}
                                          deathDate={person.deathDate}
+                                         country={person.country}
+                                         city={person.city}
                                          /> ))
     );
   }
 }
-{/* <Stage width={window.innerWidth} height={window.innerHeight}>
-        <Layer>
-          <PersonPic name={Person.firstName} />
-        </Layer>
-      </Stage> */}
 
-              {/* <CardTest avatar = {Person.avatar} firstName = {Person.firstName} lastName={Person.lastName}/>,
-        <CardTest />,
-        <CardTest />,
-        <CardTest />, */}
 export default App;

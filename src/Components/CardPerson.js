@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-const CardTest = (props) => {
+const CardPerson = (props) => {
     return(
     <Card>
       <Image src = {props.avatar} size="massive"/>
@@ -23,4 +23,4 @@ const CardTest = (props) => {
     </Card>)
   }
 
-  export default CardTest;
+  export default CardPerson;

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-//import Konva from 'konva';
 import './App.css';
-//import { Stage, Layer, Rect, Text, Group } from 'react-konva';
 import faker from 'faker';
 import rd3 from 'react-d3-library'
-import CardTest from './Components/CardTest'
-
-
+import CardPerson from './Components/CardPerson'
 
 const persons = [];
 
@@ -25,12 +21,10 @@ for(let i = 0; i < 10; i++){
   })
 }
 
-
-
 class App extends Component {
   render() {
     return (
-        (persons.map(person => <CardTest key={person.id} 
+        (persons.map(person => <CardPerson key={person.id} 
                                          id={person.id} 
                                          avatar={person.avatar}
                                          firstName={person.firstName} 

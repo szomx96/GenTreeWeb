@@ -7,8 +7,13 @@ let data = {
     children: [{
         name: 'Child One'
     }, {
-        name: 'Child Two'
-    }]
+        name: 'Child Two',
+        gProps: {
+			className: 'superNode',
+			onClick: node =>
+				alert(`Clicked ${node}!`)
+		}
+    }],
 };
  
 
@@ -16,8 +21,13 @@ const TreeGraph = (props) => (
 <Tree
     data={data}
     height={400}
-    width={400}/>
-
+    width={400}
+    svgProps={{
+		transform: 'rotate(90)',
+         
+        
+	}}
+    />
 )
 
 export default TreeGraph;

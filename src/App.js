@@ -3,6 +3,7 @@ import './App.css';
 import faker from 'faker';
 import rd3 from 'react-d3-library'
 import CardPerson from './Components/CardPerson'
+import TreeGraph from './Components/TreeGraph'
 
 const persons = [];
 
@@ -24,7 +25,9 @@ for(let i = 0; i < 10; i++){
 class App extends Component {
   render() {
     return (
-        (persons.map(person => <CardPerson key={person.id} 
+      <>
+    
+    {( persons.map((person) => <CardPerson key={person.id} 
                                          id={person.id} 
                                          avatar={person.avatar}
                                          firstName={person.firstName} 
@@ -35,7 +38,11 @@ class App extends Component {
                                          deathDate={person.deathDate}
                                          country={person.country}
                                          city={person.city}
-                                         /> ))
+                                         /> ))}
+
+<TreeGraph />
+        </>
+       
     );
   }
 }

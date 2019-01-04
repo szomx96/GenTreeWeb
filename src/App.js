@@ -4,6 +4,8 @@ import faker from 'faker';
 import rd3 from 'react-d3-library'
 import CardPerson from './Components/CardPerson'
 import TreeGraph from './Components/TreeGraph'
+import Test from './Components/Test'
+
 
 const persons = [];
 
@@ -40,7 +42,8 @@ class App extends Component {
                                          city={person.city}
                                          /> ))}
 
-<TreeGraph />
+{/* <TreeGraph /> */}
+<Test />
         </>
        
     );

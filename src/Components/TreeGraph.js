@@ -1,20 +1,25 @@
 import React from 'react'
 import Tree from 'react-tree-graph';
 import 'react-tree-graph/dist/style.css'
+import faker from 'faker';
 
-let data = {
-    name: 'Parent',
-    children: [{
-        name: 'Child One'
-    }, {
-        name: 'Child Two',
-        gProps: {
-			className: 'superNode',
+
+
+const data = {
+	name: 'Parent',
+	children: [{
+		name: 'Child One'
+	}, {
+		name: 'Child Two',
+		gProps: {
+			className: 'red-node',
 			onClick: node =>
 				alert(`Clicked ${node}!`)
 		}
-    }],
+	}]
 };
+
+
  
 
 const TreeGraph = (props) => (

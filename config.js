@@ -1,27 +1,34 @@
-var oC = function(){
-    console.log(chart_config);
+
+
+createNode = (htmlElement, mEvent) => {
+
+    //console.log("htmlelement" + htmlElement.toSource());
+
+    // htmlElement.addEventListener("click", function(){
+    //     console.log("onclick added??");
+    //   });
+
+
+    // Object.addEventListener("click", function(){
+    //     console.log("clicked");
+    //   });
+
 }
 
-onClick = () => {
-    
-    console.log("test");
-    
 
-}
 
-test = (htmlElement, mEvent) => {
-
-    console.log("oncreatenode");
-}
 
 showInfo = (htmlElement, mEvent) => {
-    console.log(mEvent.srcElement.offsetParent.data.treenode);
+    console.log(mEvent);
+    //console.log(mEvent.srcElement.offsetParent.data.treenode);
 
 
     document.getElementById("cardImage").src=mEvent.srcElement.offsetParent.data.treenode.image;
     document.getElementById("cardHeader").innerHTML=mEvent.srcElement.offsetParent.data.treenode.text.name;
     document.getElementById("cardDesc").innerHTML=mEvent.srcElement.offsetParent.data.treenode.text.desc;
 }
+
+
 
 var chart_config = {    
     "chart": {
@@ -36,7 +43,7 @@ var chart_config = {
     "callback":{
 
       "onAfterClickCollapseSwitch": (htmlElement, mEvent) => {showInfo(htmlElement, mEvent)},
-      "onCreateNode": (htmlElement, mEvent) => {test(htmlElement, mEvent)},
+      "onTreeLoaded": (htmlElement, mEvent) => {createNode(htmlElement, mEvent)},
 
     },
     

@@ -2050,6 +2050,7 @@
             onAfterClickCollapseSwitch: function( nodeSwitch, event ) {}, // this = TreeNode
             onBeforeClickCollapseSwitch: function( nodeSwitch, event ) {}, // this = TreeNode
             onTreeLoaded: function( rootTreeNode ) {} // this = Tree
+            
         }
     };
 

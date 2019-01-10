@@ -110,7 +110,8 @@ input[type=text], input[type=password] {
   }
 
   body#login {
-    background-image: url("./img/tree-background.jpg");
+    /* background-image: url("./img/tree-background.jpg"); na chuj to sie milion godzin ładuje?! */
+    background-color: #006666;
     height: 100%; 
     background-position: center;
     background-repeat: no-repeat;
@@ -125,7 +126,8 @@ body {
     color: #001a00;
     margin: 0;
 
-    background-image: url("./img/bcg.jpg");
+    /* background-image: url("./img/bcg.jpg"); jak wyżej, reeeeeeeeee */
+    background-color: #006666;
     background-position: center;
     background-repeat: repeat-x;
     background-size: cover;

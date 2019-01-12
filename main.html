@@ -15,9 +15,9 @@
 
 <body>
         <div class="navbar">
-                <a href="#">Home</a>
-                <a href="#">My Trees</a>
-                <a href="#">Settings</a>
+                <a id="home" href="#">Home</a>
+                <a id="myTrees" href="#">My Trees</a>
+                <a id = "settings" href="#">Settings</a>
         </div>
 
         <div class="info">
@@ -55,18 +55,21 @@
             </div>
         </div>
 
+        
+        <script src="./scripts/main.js"></script>
+
+
+        <!--- treant.js scripts -->
 
             <script src="./treant/vendor/raphael.js"></script>
             <script src="./treant/Treant.js"></script>
-
             <script src="./treant/vendor/jquery.min.js"></script>
-            <script src="./treant/vendor/jquery.easing.js"></script>
-
-            <script src="./scripts/main.js"></script>
+            <script src="./treant/vendor/jquery.easing.js"></script>            
             <script src="./scripts/config.js"></script>
             <script>
                 tree = new Treant(chart_config);
             </script>
+
        
 </body>
 

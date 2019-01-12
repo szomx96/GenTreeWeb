@@ -1,21 +1,15 @@
-var dupa = JSON.parse(localStorage.getItem('sessionData'));
+var data = JSON.parse(localStorage.getItem('sessionData'));
 
-console.log(JSON.stringify(dupa));
-console.log(utkajDupe());
+document.getElementById("myTrees").addEventListener("click", function() {
+    location.replace("./trees.html");
+  }, false);
+  
+document.getElementById("home").addEventListener("click", function() {
+    location.replace("./main.html");
+  }, false);
 
-document.getElementById('usernameText').innerHTML = dupa.username;
+  document.getElementById("settings").addEventListener("click", function() {
+    location.replace("./settings.html");
+  }, false);
 
-function utkajDupe(){
-    var url = 'https://gentreeappapi.azurewebsites.net/api/trees';
-    var status;
-
-    fetch(url, {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${dupa.token}`
-        }
-      }).then(res => {status = res.status; return res.json()})
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error));
-}
+document.getElementById('usernameText').innerHTML = data.username;

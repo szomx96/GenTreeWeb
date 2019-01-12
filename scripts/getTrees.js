@@ -21,7 +21,18 @@ function getTrees(){
           'Authorization': `Bearer ${data.token}`
         }
       })
-      .then(res => {status = res.status; return res.json()})
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(res => { 
+        status = res.status;
+        return res.json()
+      })
+      .then(response => {
+        //console.log('Success:', JSON.stringify(response));
+        displayList(JSON.stringify(response));      
+      })
       .catch(error => console.error('Error:', error));
+}
+
+function displayList(response){
+
+  console.log("display list" + response);
 }

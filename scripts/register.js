@@ -1,7 +1,5 @@
 document.getElementById("registerButton").addEventListener("click", function() {
 
-    console.log("register button clicked");
-
     var name = document.getElementById("name").value;
     var password = document.getElementById("password").value;
     var passwordRepeated = document.getElementById("passwordRepeated").value;
@@ -31,7 +29,6 @@ function createUser(name, password){
           if(response.status == 200){
               document.getElementById("infoLabel").innerHTML = "Account successfully created!";
               clearInput();
-              document.getElementById("buttonRegLogin").style.visibility="visible";
           }
         })
       .catch(error => console.error('Error:', error));

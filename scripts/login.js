@@ -23,7 +23,15 @@ function sendLogin(name, password){
           if (status == 200) {                                       // to moze byc nie po bożemu, można po res.statusie wejsc w then nastepne?
               localStorage.setItem('sessionData', JSON.stringify(response));          // kurwa na chuja jsona do stringa i stringa z powrotem do jsona, no japierdole, działający dopomóż
               location.replace("./main.html");                             //zamiast .replace() spróbować .href lub .assign()
+            }else{
+                document.getElementById("infoLabel").innerHTML=response.message;
+                clearInput();
             }
         })
       .catch(error => console.error('Error:', error));
+}
+
+function clearInput(){
+    document.getElementById("name").value="";
+    document.getElementById("password").value="";
 }

@@ -5,7 +5,6 @@ console.log(utkajDupe());
 
 document.getElementById('usernameText').innerHTML = dupa.username;
 
-
 function utkajDupe(){
     var url = 'https://gentreeappapi.azurewebsites.net/api/trees';
     var status;

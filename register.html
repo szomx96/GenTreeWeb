@@ -6,7 +6,7 @@
     <title>GenTreeApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <script src="main.js"></script>
+
 </head>
 <body id="login">
 
@@ -15,15 +15,22 @@
             <h1>GenTreeApp</h1>
 
                 <label for="username"><b>Username:</b></label>
-                <input type="text" name="username" required>
+                <input id="name" type="text" name="username"  required>
             
                 <label for="password"><b>Password:</b></label>
-                <input type="password" name="password" required>
+                <input id="password" type="password" required>
+
+                <label for="passwordRepeated"><b>Repeat password:</b></label>
+                <input id="passwordRepeated" type="password" required>
             
-                <button type="submit">Login</button>
+                <button id="registerButton" type="submit">Register</button>
+
+                <label id="infoLabel"></label>
+                <button id="buttonRegLogin">Log in!</button>
                 
         </div>
 
     
 </body>
+<script src="./scripts/register.js"></script>
 </html>

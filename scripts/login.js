@@ -2,6 +2,10 @@ document.getElementById("loginButton").addEventListener("click", function() {
     sendLogin(document.getElementById("name").value, document.getElementById("password").value);
 }, false);
 
+document.getElementById("registerButton").addEventListener("click", function() {
+    location.replace("./register.html");
+}, false);
+
 function sendLogin(name, password){
     var url = 'https://gentreeappapi.azurewebsites.net/api/users/auth';
     var data = {name: name, password: password};

@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function getTrees(){
 
-    console.log("get trees called");
-
     var url = 'https://gentreeappapi.azurewebsites.net/api/trees';
     var status;
 

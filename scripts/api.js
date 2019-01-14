@@ -1,7 +1,7 @@
 var url = "'https://gentreeappapi.azurewebsites.net/api/";
-var data = JSON.parse(localStorage.getItem('sessionData'));
+//var data = JSON.parse(localStorage.getItem('sessionData'));
 
-function media(id, method) { //GET, DELETE
+export function media(id, method) { //GET, DELETE
 
     var status;
     var url = url + `media/${id}`;
@@ -28,7 +28,7 @@ function media(id, method) { //GET, DELETE
         .catch(error => console.error('Error:', error));
 }
 
-function postMedia(body) {
+export function postMedia(body) {
 
     var url = url + "media";
 
@@ -51,7 +51,7 @@ function postMedia(body) {
     }).catch(error => console.error('Error:', error));
 }
 
-function person(id, method) { //GET, DELETE
+export function person(id, method) { //GET, DELETE
 
     var status;
     var url = url + `persons/${id}`;
@@ -78,29 +78,29 @@ function person(id, method) { //GET, DELETE
         .catch(error => console.error('Error:', error));
 }
 
-function getPersonMedia(id){
+export function getPersonMedia(id) {
 
     var url = url + `persons/${id}/media`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        console.log('Success:', JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            console.log('Success:', JSON.stringify(response));
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function postPersonMedia(id, body) {
+export function postPersonMedia(id, body) {
 
     var status;
     var url = url + `persons/${id}/media`;
@@ -124,51 +124,51 @@ function postPersonMedia(id, body) {
     }).catch(error => console.error('Error:', error));
 }
 
-function getPersonAvatar(id){
+export function getPersonAvatar(id) {
 
     var url = url + `persons/${id}/media/avatar`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        console.log('Success:', JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            console.log('Success:', JSON.stringify(response));
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function getPersonEvents(id){
+export function getPersonEvents(id) {
 
     var url = url + `persons/${id}/events`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        console.log('Success:', JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            console.log('Success:', JSON.stringify(response));
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function postPersonEvents(id, body){
+export function postPersonEvents(id, body) {
 
     var url = url + `persons/${id}/events`;
     var status;
@@ -176,49 +176,49 @@ function postPersonEvents(id, body){
     fetch(url, {
         method: 'POST',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        console.log('Success:', JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            console.log('Success:', JSON.stringify(response));
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function getPersonComments(id){
+export function getPersonComments(id) {
 
     var url = url + `persons/${id}/comments`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }    
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function postPersonComments(id,body){
+export function postPersonComments(id, body) {
 
     var url = url + `persons/${id}/comments`;
     var status;
@@ -226,54 +226,54 @@ function postPersonComments(id,body){
     fetch(url, {
         method: 'GET',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',          
-          'Authorization': `Bearer ${data.token}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`,
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response.id;
-        } else {
-            return status;
-        }    
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response.id;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function getPersonRelations(id){
+export function getPersonRelations(id) {
 
     var url = url + `persons/${id}/relations`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }    
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function postPerson(idTree, body){
+export function postPerson(idTree, body) {
 
     var url = url + `persons/${idTree}/events`;
     var status;
@@ -281,54 +281,55 @@ function postPerson(idTree, body){
     fetch(url, {
         method: 'POST',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 201) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 201) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
-function changePersonAvatar(idPerson, idAvatar){
+
+export function changePersonAvatar(idPerson, idAvatar) {
 
     var url = url + `persons/${idPerson}/media/${idAvatar}/avatar`;
     var status;
 
     fetch(url, {
         method: 'PUT',
- 
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function postPersonRelations(body){
+export function postPersonRelations(body) {
 
     var url = url + `persons/relations`;
     var status;
@@ -336,26 +337,27 @@ function postPersonRelations(body){
     fetch(url, {
         method: 'POST',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 201) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 201) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
-function postTree( body){
+
+export function postTree(body) {
 
     var url = url + `trees`;
     var status;
@@ -363,178 +365,173 @@ function postTree( body){
     fetch(url, {
         method: 'POST',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 201) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 201) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-
-function getTreeById(id){
+export function getTreeById(id) {
 
     var url = url + `trees/${id}`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function deleteTreeById(id){
+export function deleteTreeById(id) {
 
     var url = url + `trees/${id}`;
     var status;
 
     fetch(url, {
         method: 'DELETE',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return status;
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return status;
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-
-
-
-function getUserTrees(id){
+export function getUserTrees(id) {
 
     var url = url + `trees/user/${id}`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function getPersonsFromTree(id){
+export function getPersonsFromTree(id) {
 
     var url = url + `trees/${id}/persons`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
-function addTreeOwner(treeId,userId){
+
+export function addTreeOwner(treeId, userId) {
 
     var url = url + `trees/${treeId}/users/${userId}`;
     var status;
 
     fetch(url, {
         method: 'POST',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return status;
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return status;
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-
-
-function getUserAvatar(id){
+export function getUserAvatar(id) {
 
     var url = url + `users/${id}/avatar`;
     var status;
 
     fetch(url, {
         method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        if (status == 200) {
-            console.log('Success:', JSON.stringify(response));
-            return response;
-        } else {
-            return status;
-        }  
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-function addUserAvatar(body){
+export function addUserAvatar(body) {
 
     var url = url + `users/avatar`;
     var status;
@@ -542,14 +539,33 @@ function addUserAvatar(body){
     fetch(url, {
         method: 'POST',
         body: body,
-        headers:{
-          'Content-Type': 'application/json',          
-          'Authorization': `Bearer ${data.token}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`,
         }
-      })
-      .then(res => { 
-        status = res.status;
-        return status;
-      })
-      .catch(error => console.error('Error:', error));
+    })
+        .then(res => {
+            status = res.status;
+            return status;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+export function postLogin(name, password) {
+    var url = 'https://gentreeappapi.azurewebsites.net/api/users/auth';
+    var data = { name: name, password: password };
+    var status;
+
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+export function test(xd) {
+    console.log("test sie wywowal");
+
 }

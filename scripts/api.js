@@ -551,10 +551,23 @@ export function addUserAvatar(body) {
         .catch(error => console.error('Error:', error));
 }
 
+// export function postLogin1(name, password) {
+//     var url = 'https://gentreeappapi.azurewebsites.net/api/users/auth';
+//     var data = { name: name, password: password };
+//     var status;
+
+//     return fetch(url, {
+//         method: 'POST',
+//         body: JSON.stringify(data),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     })
+// }
+
 export function postLogin(name, password) {
     var url = 'https://gentreeappapi.azurewebsites.net/api/users/auth';
     var data = { name: name, password: password };
-    var status;
 
     return fetch(url, {
         method: 'POST',
@@ -562,10 +575,12 @@ export function postLogin(name, password) {
         headers: {
             'Content-Type': 'application/json'
         }
-    })
-}
-
-export function test(xd) {
-    console.log("test sie wywowal");
-
+        }) .then(res => {
+            if (res.ok){
+                return res.json();
+            }
+            else {
+                Promise.reject(new Error(`Error code: ${res.status}`));
+            }
+        })
 }

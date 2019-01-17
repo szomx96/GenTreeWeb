@@ -506,10 +506,10 @@ export function addTreeOwner(treeId, userId) {
 
 export function getUserAvatar(id) {
 
-    var url = baseUrl + `users/${id}/avatar`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/users/${id}/avatar`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -522,7 +522,7 @@ export function getUserAvatar(id) {
         })
         .then(response => {
             if (status == 200) {
-                console.log('Success:', JSON.stringify(response));
+                //console.log('Success:', response);
                 return response;
             } else {
                 return status;

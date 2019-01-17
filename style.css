@@ -31,7 +31,8 @@
 .navbar a:hover {
     background-color: #4dff4d;
     color: #001a00;
-	font-weight: bold;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .row {  

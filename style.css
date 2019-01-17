@@ -31,7 +31,8 @@
 .navbar a:hover {
     background-color: #4dff4d;
     color: #001a00;
-	font-weight: bold;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .row {  
@@ -129,3 +130,21 @@ h2{
     color: black;
     font-size: 90%;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    text-align: left;
+    padding: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 120%;
+}
+
+tr:hover {
+    background-color: #ffff99;
+    cursor: pointer;
+}
+ 

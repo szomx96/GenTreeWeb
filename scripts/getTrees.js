@@ -1,38 +1,47 @@
+import * as api from './api.js';
+
 var data = JSON.parse(localStorage.getItem('sessionData'));
 
 document.addEventListener('DOMContentLoaded', function() {
-  getTrees();
+  displayList();
 }, false);
 
-//console.log(JSON.stringify(data));
-//console.log(getTrees());
+function displayList() {
 
-function getTrees(){
+  var res;
 
-    console.log("get trees called");
+  api.getUserTrees(data.id)
+    .then(response => {
+      console.log('display:', response);
+      res = response;
+      var length = Object.keys(response[0]).length;
+      return length;
 
-    var url = 'https://gentreeappapi.azurewebsites.net/api/trees';
-    var status;
+    }).then(length => {
 
-    fetch(url, {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
-        }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        //console.log('Success:', JSON.stringify(response));
-        displayList(JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
+      console.log(length);
+
+      var table = document.getElementById("treeList");
+      var rows = [];
+      var cells = [];
+
+      for (var i = 0; i < length; i++) {
+        rows.push(table.insertRow(i));
+        cells.push(rows[i].insertCell(0));
+        cells[i].innerHTML = res[i].name;
+      }
+
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("click", showSelectedTree(i, res));
+      }
+
+    });
 }
 
-function displayList(response){
-
-  console.log("display list" + response);
+function showSelectedTree(i, res) {
+  return function() {
+      console.log("you clicked region number " + i);
+      console.log(res[i].id);
+      //przekierowanie do maina i wyswietlenie drzewa z tym id
+  };
 }

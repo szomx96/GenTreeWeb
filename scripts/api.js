@@ -1,4 +1,4 @@
-var url = "'https://gentreeappapi.azurewebsites.net/api/";
+var baseUrl = "https://gentreeappapi.azurewebsites.net/api/";
 //var data = JSON.parse(localStorage.getItem('sessionData'));
 
 export function media(id, method) { //GET, DELETE
@@ -387,7 +387,7 @@ export function postTree(body) {
 
 export function getTreeById(id) {
 
-    var url = url + `trees/${id}`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/trees/${id}`;
     var status;
 
     fetch(url, {
@@ -433,10 +433,10 @@ export function deleteTreeById(id) {
 
 export function getUserTrees(id) {
 
-    var url = url + `trees/user/${id}`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/trees/user/${id}`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -449,7 +449,7 @@ export function getUserTrees(id) {
         })
         .then(response => {
             if (status == 200) {
-                console.log('Success:', JSON.stringify(response));
+                // console.log('Success:', JSON.stringify(response));
                 return response;
             } else {
                 return status;

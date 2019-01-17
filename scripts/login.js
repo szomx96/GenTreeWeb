@@ -34,7 +34,7 @@ function sendLogin() {
     console.log('sendLogin sie wywowal');
 let status;
 
-    api.postLogin1(document.getElementById("name").value, document.getElementById("password").value) //no fajna abstrakcja, czy to ten no, boilerplate?
+    api.postLogin(document.getElementById("name").value, document.getElementById("password").value) //no fajna abstrakcja, czy to ten no, boilerplate?
         .then(response => {
             console.log('Success:', JSON.stringify(response));
                 

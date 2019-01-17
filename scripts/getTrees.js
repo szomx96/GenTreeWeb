@@ -1,36 +1,32 @@
+import * as api from './api.js';
+
 var data = JSON.parse(localStorage.getItem('sessionData'));
 
 document.addEventListener('DOMContentLoaded', function() {
-  getTrees();
+  displayList();
 }, false);
 
-//console.log(JSON.stringify(data));
-//console.log(getTrees());
 
-function getTrees(){
 
-    var url = 'https://gentreeappapi.azurewebsites.net/api/trees';
-    var status;
 
-    fetch(url, {
-        method: 'GET',
-        headers:{
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data.token}`
-        }
-      })
-      .then(res => { 
-        status = res.status;
-        return res.json()
-      })
-      .then(response => {
-        //console.log('Success:', JSON.stringify(response));
-        displayList(JSON.stringify(response));      
-      })
-      .catch(error => console.error('Error:', error));
-}
+function displayList(){
 
-function displayList(response){
+  //console.log(api.getUserTrees(data.id));
 
-  console.log("display list" + response);
+  api.getUserTrees(data.id)
+  .then(response =>{
+    console.log('Success:', response);
+  });
+  
+
+  var table = document.getElementById("treeList");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+
+  // var length = Object.keys(data.list[0]).length;
+  // console.log(length);
+
+  cell1.innerHTML = "test";
+  
+
 }

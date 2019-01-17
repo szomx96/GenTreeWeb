@@ -4,7 +4,7 @@ var baseUrl = "https://gentreeappapi.azurewebsites.net/api/";
 export function media(id, method) { //GET, DELETE
 
     var status;
-    var url = url + `media/${id}`;
+    var url = baseUrl + `media/${id}`;
 
     fetch(url, {
         method: method.toUpperCase(),
@@ -30,7 +30,7 @@ export function media(id, method) { //GET, DELETE
 
 export function postMedia(body) {
 
-    var url = url + "media";
+    var url = baseUrl + "media";
 
     fetch(url, {
         method: 'POST',
@@ -54,7 +54,7 @@ export function postMedia(body) {
 export function person(id, method) { //GET, DELETE
 
     var status;
-    var url = url + `persons/${id}`;
+    var url = baseUrl + `persons/${id}`;
 
     fetch(url, {
         method: method,
@@ -80,7 +80,7 @@ export function person(id, method) { //GET, DELETE
 
 export function getPersonMedia(id) {
 
-    var url = url + `persons/${id}/media`;
+    var url = baseUrl + `persons/${id}/media`;
     var status;
 
     fetch(url, {
@@ -103,7 +103,7 @@ export function getPersonMedia(id) {
 export function postPersonMedia(id, body) {
 
     var status;
-    var url = url + `persons/${id}/media`;
+    var url = baseUrl + `persons/${id}/media`;
 
     fetch(url, {
         method: 'POST',
@@ -126,7 +126,7 @@ export function postPersonMedia(id, body) {
 
 export function getPersonAvatar(id) {
 
-    var url = url + `persons/${id}/media/avatar`;
+    var url = baseUrl + `persons/${id}/media/avatar`;
     var status;
 
     fetch(url, {
@@ -148,7 +148,7 @@ export function getPersonAvatar(id) {
 
 export function getPersonEvents(id) {
 
-    var url = url + `persons/${id}/events`;
+    var url = baseUrl + `persons/${id}/events`;
     var status;
 
     fetch(url, {
@@ -170,7 +170,7 @@ export function getPersonEvents(id) {
 
 export function postPersonEvents(id, body) {
 
-    var url = url + `persons/${id}/events`;
+    var url = baseUrl + `persons/${id}/events`;
     var status;
 
     fetch(url, {
@@ -193,7 +193,7 @@ export function postPersonEvents(id, body) {
 
 export function getPersonComments(id) {
 
-    var url = url + `persons/${id}/comments`;
+    var url = baseUrl + `persons/${id}/comments`;
     var status;
 
     fetch(url, {
@@ -220,7 +220,7 @@ export function getPersonComments(id) {
 
 export function postPersonComments(id, body) {
 
-    var url = url + `persons/${id}/comments`;
+    var url = baseUrl + `persons/${id}/comments`;
     var status;
 
     fetch(url, {
@@ -248,7 +248,7 @@ export function postPersonComments(id, body) {
 
 export function getPersonRelations(id) {
 
-    var url = url + `persons/${id}/relations`;
+    var url = baseUrl + `persons/${id}/relations`;
     var status;
 
     fetch(url, {
@@ -275,7 +275,7 @@ export function getPersonRelations(id) {
 
 export function postPerson(idTree, body) {
 
-    var url = url + `persons/${idTree}/events`;
+    var url = baseUrl + `persons/${idTree}/events`;
     var status;
 
     fetch(url, {
@@ -303,7 +303,7 @@ export function postPerson(idTree, body) {
 
 export function changePersonAvatar(idPerson, idAvatar) {
 
-    var url = url + `persons/${idPerson}/media/${idAvatar}/avatar`;
+    var url = baseUrl + `persons/${idPerson}/media/${idAvatar}/avatar`;
     var status;
 
     fetch(url, {
@@ -331,7 +331,7 @@ export function changePersonAvatar(idPerson, idAvatar) {
 
 export function postPersonRelations(body) {
 
-    var url = url + `persons/relations`;
+    var url = baseUrl + `persons/relations`;
     var status;
 
     fetch(url, {
@@ -359,7 +359,7 @@ export function postPersonRelations(body) {
 
 export function postTree(body) {
 
-    var url = url + `trees`;
+    var url = baseUrl + `trees`;
     var status;
 
     fetch(url, {
@@ -414,7 +414,7 @@ export function getTreeById(id) {
 
 export function deleteTreeById(id) {
 
-    var url = url + `trees/${id}`;
+    var url = baseUrl + `trees/${id}`;
     var status;
 
     fetch(url, {
@@ -449,7 +449,7 @@ export function getUserTrees(id) {
         })
         .then(response => {
             if (status == 200) {
-                // console.log('Success:', JSON.stringify(response));
+                console.log('Success:', JSON.stringify(response));
                 return response;
             } else {
                 return status;
@@ -460,7 +460,7 @@ export function getUserTrees(id) {
 
 export function getPersonsFromTree(id) {
 
-    var url = url + `trees/${id}/persons`;
+    var url = baseUrl + `trees/${id}/persons`;
     var status;
 
     fetch(url, {
@@ -487,7 +487,7 @@ export function getPersonsFromTree(id) {
 
 export function addTreeOwner(treeId, userId) {
 
-    var url = url + `trees/${treeId}/users/${userId}`;
+    var url = baseUrl + `trees/${treeId}/users/${userId}`;
     var status;
 
     fetch(url, {
@@ -506,7 +506,7 @@ export function addTreeOwner(treeId, userId) {
 
 export function getUserAvatar(id) {
 
-    var url = url + `users/${id}/avatar`;
+    var url = baseUrl + `users/${id}/avatar`;
     var status;
 
     fetch(url, {
@@ -533,7 +533,7 @@ export function getUserAvatar(id) {
 
 export function addUserAvatar(body) {
 
-    var url = url + `users/avatar`;
+    var url = baseUrl + `users/avatar`;
     var status;
 
     fetch(url, {

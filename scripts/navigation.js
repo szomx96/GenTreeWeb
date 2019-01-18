@@ -1,3 +1,6 @@
+var data = JSON.parse(localStorage.getItem('sessionData'));
+document.getElementById('usernameText').innerHTML = data.username;
+
 document.getElementById("myTrees").addEventListener("click", function() {
     location.replace("./trees.html");
   }, false);

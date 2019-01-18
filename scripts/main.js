@@ -51,6 +51,7 @@ function init(callback) {
 }
 
 function drawTree() {
+
   init(function (response) {
     dTree.init(response, {
       target: "#graph",
@@ -58,9 +59,7 @@ function drawTree() {
       height: 800,
       width: 1200,
       callbacks: {
-        nodeClick: function (name, extra) {
-          console.log(name);
-        },
+        nodeClick: (name, extra) => {nodeOnClick(name, extra)},
         textRenderer: function (name, extra, textClass) {
           // THis callback is optinal but can be used to customize
           // how the text is rendered without having to rewrite the entire node
@@ -84,4 +83,10 @@ function drawTree() {
       }
     });
   });
+}
+
+function nodeOnClick(name, extra){
+
+  document.getElementById("cardHeader").innerHTML=name;
+  
 }

@@ -1,15 +1,29 @@
+import * as api from './api.js';
+
 var data = JSON.parse(localStorage.getItem('sessionData'));
+//var treeID;
 
-document.getElementById("myTrees").addEventListener("click", function() {
-    location.replace("./trees.html");
-  }, false);
-  
-document.getElementById("home").addEventListener("click", function() {
-    location.replace("./main.html");
-  }, false);
+document.addEventListener('DOMContentLoaded', function() {
+  loadTree();  
+}, false);
 
-  document.getElementById("settings").addEventListener("click", function() {
-    location.replace("./settings.html");
-  }, false);
 
 document.getElementById('usernameText').innerHTML = data.username;
+
+ function loadTree(){
+
+  api.getUserTrees(data.id)
+  .then(response => {
+    //id pierwszego drzewa
+    return response[0].id;    
+  })
+  .then(res => {
+    console.log(res);
+
+    api.getPersonsFromTree(res)
+    .then(response => {
+      console.log(response);
+    });
+
+  });
+ }

@@ -1,5 +1,5 @@
 var baseUrl = "https://gentreeappapi.azurewebsites.net/api/";
-//var data = JSON.parse(localStorage.getItem('sessionData'));
+var data = JSON.parse(localStorage.getItem('sessionData'));
 
 export function media(id, method) { //GET, DELETE
 
@@ -30,9 +30,9 @@ export function media(id, method) { //GET, DELETE
 
 export function postMedia(body) {
 
-    var url = baseUrl + "media";
+    var url = "https://gentreeappapi.azurewebsites.net/api/media";
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         body: body,
         headers: {
@@ -463,7 +463,7 @@ export function getPersonsFromTree(id) {
     var url = baseUrl + `trees/${id}/persons`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -476,7 +476,7 @@ export function getPersonsFromTree(id) {
         })
         .then(response => {
             if (status == 200) {
-                console.log('Success:', JSON.stringify(response));
+                //console.log('Success:', JSON.stringify(response));
                 return response;
             } else {
                 return status;
@@ -506,11 +506,12 @@ export function addTreeOwner(treeId, userId) {
 
 export function getUserAvatar(id) {
 
-    var url = `https://gentreeappapi.azurewebsites.net/api/users/${id}/avatar`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/users/${id}/avatar/file`;
     var status;
 
     return fetch(url, {
-        method: 'GET',
+        method: 'POST',
+        body: id,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -522,7 +523,6 @@ export function getUserAvatar(id) {
         })
         .then(response => {
             if (status == 200) {
-                //console.log('Success:', response);
                 return response;
             } else {
                 return status;

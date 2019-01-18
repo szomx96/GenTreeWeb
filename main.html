@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width">
     <title>GenTreeApp</title>
     <link rel="stylesheet" href="./semantic/semantic.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/style_tree.css">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="https://cdn.rawgit.com/ErikGartner/dTree/2.0.2/dist/dTree.min.js"></script>
+   
 </head>
 
 <body>
@@ -48,12 +53,13 @@
             </div>        
         
             <div class="main">              
-                    <div class="chart" id="collapsable-example"></div>               
+                <div id="graph"></div>            
             </div>
         </div>
 
         
-        <script src="./scripts/main.js"></script>
+        <script src="./scripts/main.js" type="module"></script>
+        <script src="./scripts/navigation.js"></script>
 
        
 </body>

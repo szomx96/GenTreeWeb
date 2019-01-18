@@ -1,12 +1,11 @@
 import * as api from './api.js';
 
 var data = JSON.parse(localStorage.getItem('sessionData'));
-document.getElementById('usernameText').innerHTML = data.username;
+//document.getElementById('usernameText').innerHTML = data.username;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadTree();  
 }, false);
-
 
 
  function loadTree(){
@@ -27,7 +26,55 @@ document.addEventListener('DOMContentLoaded', function() {
   });
  }
 
- var treeData = 
+ var treeData = [{
+  "name": "Niclas Superlongsurname",
+  "class": "man",
+  "textClass": "emphasis",
+  "marriages": [{
+    "spouse": {
+      "name": "Iliana",
+      "class": "woman",
+      "extra": {
+      	"nickname": "Illi"
+      }
+    },
+    "children": [{
+      "name": "James",
+      "class": "man",
+      "marriages": [{
+        "spouse": {
+          "name": "Alexandra",
+          "class": "woman"
+        },
+        "children": [{
+          "name": "Eric",
+          "class": "man",
+          "marriages": [{
+            "spouse": {
+              "name": "Eva",
+              "class": "woman"
+            }
+          }]
+        }, {
+          "name": "Jane",
+          "class": "woman"
+        }, {
+          "name": "Jasper",
+          "class": "man"
+        }, {
+          "name": "Emma",
+          "class": "woman"
+        }, {
+          "name": "Julia",
+          "class": "woman"
+        }, {
+          "name": "Jessica",
+          "class": "woman"
+        }]
+      }]
+    }]
+  }]
+}]
 
 
 

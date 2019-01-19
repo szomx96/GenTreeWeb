@@ -44,13 +44,62 @@
                                     </div>
                             </div>
                             <div class="extra content">
-                                <a>                                   
-                                        
-                                </a>
+                               <button id="addRelationButton">Add relation</button>    
+                               <button id="addEventButton">Add event</button>
+                               <button id="addMediaButton">Add media</button>
+                               <button id="deletePersonButton">Delete person</button>                                                                                              
                             </div>
                         </div> 
                 </div>            
-            </div>        
+            </div>
+
+            <div class="addRelation" id="addRelation">
+
+                <label for="username"><b>Name:</b></label>
+                <input id="personName" type="text" name="personName"  required>
+
+                <label for="surname"><b>Surname:</b></label>
+                <input id="personSurname" type="text" name="personSurname"  required>
+
+                <select name="personSex" id="personSex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <select name="relationType" id="relationType">
+                    <option value="male">Spouse</option>
+                    <option value="female">Child</option>
+                </select>
+
+                <button id="addRelationButtonConfirm">Add</button>
+
+            </div>
+
+            <div class="addRelation" id="addEvent">
+
+                <input type="date" name="eventDate" id="eventDate" /> <br><br>
+
+                <select name="eventType" id="eventType">
+                    <option value="birth">Birth</option>
+                    <option value="death">Death</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="divorce">Divorce</option>
+                </select> <br><br>
+
+                <label for="description"><b>Description:</b></label>
+                <input id="eventDescription" type="text" name="eventDescription"  required> <br>
+
+                <button id="addEventButtonConfirm">Add</button>
+
+            </div>
+
+            <div class="addRelation" id="addMedia">
+
+                <input type="file" name="addMedia" id="addMediaInput" accept="image/*">
+
+                <button id="addMediaButtonConfirm">Add</button>
+
+            </div>
         
             <div class="main">              
                 <div id="graph"></div>            

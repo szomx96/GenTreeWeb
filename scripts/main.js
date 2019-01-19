@@ -9,6 +9,86 @@ document.addEventListener('DOMContentLoaded', function() {
   drawTree(treeData);
 }, false);
 
+document.addEventListener("click", function(){
+  if (document.getElementById("addRelation").style.visibility === "visible") {
+    document.getElementById("addRelation").style.visibility = "hidden";
+  }
+  if (document.getElementById("addEvent").style.visibility === "visible") {
+    document.getElementById("addEvent").style.visibility = "hidden";
+  }
+  if (document.getElementById("addMedia").style.visibility === "visible") {
+    document.getElementById("addMedia").style.visibility = "hidden";
+  }
+});
+
+document.getElementById("addRelation").addEventListener("click", function(event){ //nie chowa okienka po kliknieciu na div z dodawniem relacji
+  event.stopPropagation();
+}, false);
+
+document.getElementById("addEvent").addEventListener("click", function(event){ //nie chowa okienka po kliknieciu na div z dodawniem relacji
+  event.stopPropagation();
+}, false);
+
+document.getElementById("addMedia").addEventListener("click", function(event){ //nie chowa okienka po kliknieciu na div z dodawniem relacji
+  event.stopPropagation();
+}, false);
+
+document.getElementById("addRelationButton").addEventListener("click", function(event) {
+
+  event.stopPropagation();
+  document.getElementById("addRelation").style.visibility = "visible";
+  var posX = event.clientX + "px";
+  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic
+  document.getElementById("addRelation").style.margin = posY + " 0px 0px " + posX;
+
+}, false);
+
+document.getElementById("addEventButton").addEventListener("click", function(event) {
+
+  event.stopPropagation();
+  document.getElementById("addEvent").style.visibility = "visible";
+  var posX = event.clientX + "px";
+  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic
+  document.getElementById("addEvent").style.margin = posY + " 0px 0px " + posX;
+
+}, false);
+
+document.getElementById("addMediaButton").addEventListener("click", function(event) {
+
+  event.stopPropagation();
+  document.getElementById("addMedia").style.visibility = "visible";
+  var posX = event.clientX + "px";
+  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic
+  document.getElementById("addMedia").style.margin = posY + " 0px 0px " + posX;
+
+}, false);
+
+document.getElementById("deletePersonButton").addEventListener("click", function(event) {
+
+  var decision = confirm("Are you sure?")
+
+  if(decision){
+    //wywalic z bazy ziomka i jego wszystkie powiazania
+  }
+  
+}, false);
+
+document.getElementById("addRelationButtonConfirm").addEventListener("click", function(event) {
+  //wyslac na serwer
+  document.getElementById("addRelation").style.visibility = "hidden";
+}, false);
+
+document.getElementById("addEventButtonConfirm").addEventListener("click", function(event) {
+  //wyslac na serwer
+  document.getElementById("addEvent").style.visibility = "hidden";
+}, false);
+
+document.getElementById("addMediaButtonConfirm").addEventListener("click", function(event) {
+  //wyslac na serwer
+  document.getElementById("addMedia").style.visibility = "hidden";
+}, false);
+
+
  function loadTree(){
 
   api.getUserTrees(data.id)

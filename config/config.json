@@ -2,12 +2,16 @@
     "name": "Niclas Superlongsurname",
     "class": "man",
     "marriages": [{
-      "spouse": {
+      "spouse": [{
         "name": "Iliana",
         "class": "woman",
         "extra": {
             "nickname": "Illi"
-        }
+        },{"name": "Jadwiga",
+          "class": "woman",
+          "extra": {
+              "nickname": "Illi"}
+      ]
       },
       "children": [{
         "name": "James",

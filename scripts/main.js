@@ -5,8 +5,8 @@ var treeData;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadTree();
-  loadJSON(init(drawTree));
-  drawTree(treeData);
+  // loadJSON(init(drawTree)); po co to? xD
+  drawTree();
 }, false);
 
 document.addEventListener("click", function(){
@@ -97,11 +97,11 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
     return response[0].id;    
   })
   .then(res => {
-    console.log(res);
+    console.log("to powinno byc id: ",res);
 
     api.getPersonsFromTree(res)
     .then(response => {
-      console.log(response);
+      console.log("to co sie dostaje z personsfrometree", response);
 
       //wygenerowac config.json
 
@@ -121,7 +121,7 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
           callback(xobj.responseText);
         }
   };
-  xobj.send(null);  
+  xobj.send(null); 
 }
 
 function init(callback) {

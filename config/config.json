@@ -1,7 +1,6 @@
 [{
     "name": "Niclas Superlongsurname",
     "class": "man",
-    "textClass": "emphasis",
     "marriages": [{
       "spouse": {
         "name": "Iliana",

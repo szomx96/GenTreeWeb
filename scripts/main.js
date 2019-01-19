@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
     api.getPersonsFromTree(res)
     .then(response => {
       console.log(response);
+
+      //wygenerowac config.json
+
     });
 
   });

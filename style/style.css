@@ -53,7 +53,15 @@
 	text-align: justify;
 	margin-right: 2%;
     margin-left: 2%;
-    padding: 10px;
+    padding: 2%;
+}
+
+.addRelation{
+    position: absolute;
+    padding: 2%;
+    border: 2px solid black;
+    background: white;
+    visibility: hidden;
 }
 
 footer {

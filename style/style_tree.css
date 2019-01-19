@@ -1,6 +1,11 @@
 body {
     font: 10px sans-serif;
   }
+
+  p:hover {
+    background-color: #ffff99;
+    cursor: pointer;
+}
   
   .linage {
     fill: none;

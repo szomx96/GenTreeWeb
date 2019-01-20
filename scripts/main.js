@@ -46,7 +46,7 @@ document.getElementById("addRelationButton").addEventListener("click", function(
   event.stopPropagation();
   document.getElementById("addRelation").style.visibility = "visible";
   var posX = event.clientX + "px";
-  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic
+  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic, SAMA SE KURWA NAPRAW
   document.getElementById("addRelation").style.margin = posY + " 0px 0px " + posX;
 
 }, false);
@@ -96,26 +96,14 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
   document.getElementById("addMedia").style.visibility = "hidden";
 }, false);
 
-
- function loadTree(){
-
-  api.getUserTrees(data.id)
-  .then(response => {
-    //id pierwszego drzewa
-    return response[0].id;    
-  })
-  .then(res => {
-    console.log("to powinno byc id: ",res);
-
-    api.getPersonsFromTree(res)
-    .then(persons => {
-      console.log("to co sie dostaje z personsfrometree", persons);
-
-      //wygenerowac config.json       findIndex(x => x.id === '45');
-      getTreeData(persons); //zrobic z tego konstruktor klasy z danymi?
-    });
-
-  });
+//loads tree Data from the server nad returns treeData ready for drawing library
+ async function loadTree(){ //should be given id of the tree in the argument
+  let idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
+  let persons = await api.getPersonsFromTree(idOfFirstTree); //raw data from server
+  //transforms tree data into the one compatible with our lib
+  let treeData = genTreeData(persons); 
+  //console.log("persons Data w loadtree: ", persons);
+  return treeData; 
  }
 
  function loadJSON(callback) {   
@@ -132,13 +120,17 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
   xobj.send(null); 
 }
 
-function init(callback) {
+async function init(callback) {
 
-  loadJSON(function(response) {
-   // Parse JSON string into object
-     treeData = JSON.parse(response);
-     callback(treeData);
- });
+  //   loadJSON(function(response) {
+  //    // Parse JSON string into object
+  //      treeData = JSON.parse(response);
+  //      callback(treeData);
+  //  });
+  let treeData = await loadTree();
+  console.log("tree data w init",treeData)
+  callback(treeData);
+
 }
 
 function drawTree() {
@@ -185,16 +177,28 @@ function personForGraph (personData) {
     class: personData.details.sex === 'Male'? "man": "woman",
   };
   console.log(personData, person.class);
+  return person;
 }
 
 //returns object TreeData for our library on d3 which i forgot the name of ;)
-function getTreeData(persons){
+function genTreeData(persons){
   let treeData;
-  treeData.push(personForGraph(person[0])); //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
-  // for(var i=0;i<persons.length;i++){
+  treeData = [personForGraph(persons[0])]; //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
+  treeData[0].marriages = [];
+  treeData[0].marriages.children = [];
+  for(var i=0;i<persons[0].relations.length;i++){ //powinno byc od osoby a nie od indeksu stalo ustalonego
+    switch(persons[0].relations[i].type){
+      case "Marriage":
+      treeData[0].marriages[0].spouse = [personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId))]; //ale kuracheństwo
+      break; 
+      case "Child":
+      treeData[0].marriages[0].children.push(personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId)));
+      break;
+    }
+  }
   //   personForGraph(persons[i]);
   // }
-
+  console.log("persons w generacji", persons);
   return treeData;
 }
 

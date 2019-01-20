@@ -460,7 +460,7 @@ export function getUserTrees(id) {
 
 export function getPersonsFromTree(id) {
 
-    var url = baseUrl + `trees/${id}/persons`;
+    var url = baseUrl + `trees/${id}/persons/oldest`; //oldest łatka, do przepisania
     var status;
 
     return fetch(url, {

@@ -1,10 +1,18 @@
 import * as api from './api.js';
+class TreeData {
+  contructor(value){
+
+  }
+}
 
 var data = JSON.parse(localStorage.getItem('sessionData'));
 var treeData;
+var treePersons = {
+
+};
 
 document.addEventListener('DOMContentLoaded', function() {
-  loadTree();
+  //loadTree();
   // loadJSON(init(drawTree)); po co to? xD
   drawTree();
 }, false);
@@ -100,11 +108,11 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
     console.log("to powinno byc id: ",res);
 
     api.getPersonsFromTree(res)
-    .then(response => {
-      console.log("to co sie dostaje z personsfrometree", response);
+    .then(persons => {
+      console.log("to co sie dostaje z personsfrometree", persons);
 
-      //wygenerowac config.json
-
+      //wygenerowac config.json       findIndex(x => x.id === '45');
+      getTreeData(persons); //zrobic z tego konstruktor klasy z danymi?
     });
 
   });
@@ -166,6 +174,28 @@ function drawTree() {
       }
     });
   });
+}
+
+//return object adapted to graph
+function personForGraph (personData) {
+
+  var person = {
+    id: personData.id,
+    name: personData.details.name,
+    class: personData.details.sex === 'Male'? "man": "woman",
+  };
+  console.log(personData, person.class);
+}
+
+//returns object TreeData for our library on d3 which i forgot the name of ;)
+function getTreeData(persons){
+  let treeData;
+  treeData.push(personForGraph(person[0])); //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
+  // for(var i=0;i<persons.length;i++){
+  //   personForGraph(persons[i]);
+  // }
+
+  return treeData;
 }
 
 function nodeOnClick(name, extra){

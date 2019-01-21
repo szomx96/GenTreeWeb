@@ -8,9 +8,7 @@ class TreeData {
 var rawTree;
 var data = JSON.parse(localStorage.getItem('sessionData'));
 var treeData;
-var treePersons = {
-
-};
+var treePersons = {};
 
 document.addEventListener('DOMContentLoaded', async function() {
   //loadTree();
@@ -98,15 +96,18 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
   document.getElementById("addMedia").style.visibility = "hidden";
 }, false);
 
+
 //loads tree Data from the server nad returns treeData ready for drawing library
  async function loadTree(){ //should be given id of the tree in the argument
 
   let idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
   let rawTree = await api.getPersonsFromTree(idOfFirstTree); //raw data from server
 
+  console.log("raw tree (from server): ", rawTree);
+
   let treeData = genTreeData(rawTree);   //transforms tree data into the one compatible with our lib
   // let treeData = genTreeDataForPerson(rawTree, rawTree[0].id);
-  console.log("persons Data w loadtree: ", treeData);
+  //console.log("persons Data w loadtree: ", treeData);
   return treeData; 
  }
 
@@ -141,7 +142,7 @@ async function init(callback) {
   //      callback(treeData);
   //  });
   let treeData = await loadTree();
-  console.log("tree data w init",treeData)
+  console.log("tree data w init: ", treeData);
   callback(treeData);
 
 }
@@ -189,29 +190,37 @@ function personForGraph (personData) {
     name: personData.details.name,
     class: personData.details.sex === 'Male'? "man": "woman",
   };
-  console.log(personData, person.class);
+  //console.log(personData, person.class);
   return person;
 }
 
 //returns object TreeData for our library on d3 which i forgot the name of ;)
 function genTreeData(persons){
+
+  console.log("persons ktore dostaje tree data: ", persons);
+
+  
+
   let treeData;
   treeData = [personForGraph(persons[0])]; //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
   treeData[0].marriages = [{}];
-  console.log(treeData[0].marriages[0]);
-  treeData[0].marriages[0].children = [{}];
+  //treeData[0].marriages[0].spouse={};
+  treeData[0].marriages[0].children = [];
+
+
   for(var i=0;i<persons[0].relations.length;i++){ //powinno byc od osoby a nie od indeksu stalo ustalonego
     switch(persons[0].relations[i].type){
       case "Marriage":
-      treeData[0].marriages[0].spouse = [personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId))]; //ale kuracheństwo
+      treeData[0].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId)); //ale kuracheństwo
+      console.log("spouse: ", treeData[0].marriages[0].spouse);
       break; 
-      case "Child":
-      treeData[0].marriages[0].children.push(personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId)));
+      case "Parent":
+        treeData[0].marriages[0].children[0] = personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId));
       break;
     }
   }
     //personForGraph(persons[i]);
-  console.log("persons w generacji", persons);
+  //console.log("persons w generacji", persons);
   return treeData;
 }
 

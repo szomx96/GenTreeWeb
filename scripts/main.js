@@ -103,6 +103,9 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
   let idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
   let rawTree = await api.getPersonsFromTree(idOfFirstTree); //raw data from server
 
+  //bylo testowane
+  //let rawTree = await api.getPersonsFromTree("8e49f432-ca94-4ca9-b7a0-08d678d8e1a9");
+
   console.log("raw tree (from server): ", rawTree);
 
   let treeData = genTreeData(rawTree);   //transforms tree data into the one compatible with our lib
@@ -198,29 +201,53 @@ function personForGraph (personData) {
 function genTreeData(persons){
 
   console.log("persons ktore dostaje tree data: ", persons);
-
   
+  let treeData = [];
+  
+  console.log("persons length: ", persons.length);
 
-  let treeData;
-  treeData = [personForGraph(persons[0])]; //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
-  treeData[0].marriages = [{}];
-  //treeData[0].marriages[0].spouse={};
-  treeData[0].marriages[0].children = [];
+  for (var j = 0; j < 4 ; j++) {
 
 
-  for(var i=0;i<persons[0].relations.length;i++){ //powinno byc od osoby a nie od indeksu stalo ustalonego
-    switch(persons[0].relations[i].type){
-      case "Marriage":
-      treeData[0].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId)); //ale kuracheństwo
-      console.log("spouse: ", treeData[0].marriages[0].spouse);
-      break; 
-      case "Parent":
-        treeData[0].marriages[0].children[0] = personForGraph(persons.find(person => person.id === persons[0].relations[i].secondPersonId));
-      break;
+    treeData.push(personForGraph(persons[j])); //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
+    treeData[j].marriages = [{}];
+    treeData[j].marriages[0].children = [];
+
+ 
+    for (var i = 0; i < persons[j].relations.length; i++) { //powinno byc od osoby a nie od indeksu stalo ustalonego
+
+        switch (persons[j].relations[i].type) {
+          case "Marriage":
+            if(persons[j].details.sex === "Male"){
+            treeData[j].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[j].relations[i].secondPersonId)); 
+            }else{
+              treeData[j].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[j].relations[i].firstPersonId));
+            } //ale kuracheństwo ... co ty wiesz o kurachenstwie, update xDD :*
+            break;
+          case "Parent":
+              if(persons[j].id === persons[j].relations[i].firstPersonId){          
+              treeData[j].marriages[0].children[0] = personForGraph(persons.find(person => person.id === persons[j].relations[i].secondPersonId));
+          
+              }
+            break;
+        }
+      
     }
+ 
   }
-    //personForGraph(persons[i]);
-  //console.log("persons w generacji", persons);
+  // for(var k=0;k<treeData.length;k++){
+  //   console.log(treeData[k]);
+  //   console.log(typeof treeData[k].marriages[0].spouse );
+  //   if(Object.keys(treeData[k].marriages[0].spouse).length > 0 ){
+      
+  //     console.log("w ifie kurwa jestem",treeData[k]);
+  //     var spouseId = treeData[k].marriages[0].spouse.id;
+  //     var spouse = treeData.find(chuj => chuj.id === spouseId);
+  //     //console.log(spouse);
+  //     spouse.marriages[0].spouse = {};
+     
+  //   }
+  //}
   return treeData;
 }
 

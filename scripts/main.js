@@ -83,13 +83,58 @@ document.getElementById("deletePersonButton").addEventListener("click", function
   
 }, false);
 
-document.getElementById("addRelationButtonConfirm").addEventListener("click", function(event) {
-  //wyslac na serwer
+document.getElementById("addRelationButtonConfirm").addEventListener("click", async function(event) {
+  var firstPersonID = localStorage.selectedPersonID;
+
+  var person = {
+    name: document.getElementById("personName").value,
+    surname: document.getElementById("personSurname").value,
+    sex: document.getElementById("personSex").value,
+    
+    events: [
+      {
+        date: document.getElementById("birthDate").value,
+        type: "Birth",
+        description: ""
+      }
+    ]
+  }
+
+  var addedPersonID = await api.postPerson(localStorage.currentTree, person).then(response =>response.id);  
+
+  var relation = {
+    firstPersonId: firstPersonID,
+    secondPersonId: addedPersonID,
+    type: document.getElementById("relationType").value
+  }
+
+  var tezd = await api.postPersonRelations(relation);
+  console.log(addedPersonID);
+  console.log(tezd);
+
+
+  console.log(person);
+
+  document.getElementById("personName").value = "";
+  document.getElementById("personSurname").value = "";
   document.getElementById("addRelation").style.visibility = "hidden";
+  location.reload();
 }, false);
 
 document.getElementById("addEventButtonConfirm").addEventListener("click", function(event) {
-  //wyslac na serwer
+  var personID = localStorage.selectedPersonID;
+
+  var event = {
+    date: document.getElementById("eventDate").value,
+    type: document.getElementById("eventType").value,
+    description: document.getElementById("eventDescription").value 
+  }
+
+  console.log(event);
+  api.postPersonEvent(personID, event); 
+
+
+  document.getElementById("eventDescription").value = "";
   document.getElementById("addEvent").style.visibility = "hidden";
 }, false);
 
@@ -109,6 +154,7 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
     console.log("czy chosen tree to null? ", localStorage.chosenTree);
     var idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
   }
+  localStorage.setItem('currentTree', idOfFirstTree);
   let rawTree = await api.getPersonsFromTree(idOfFirstTree); //raw data from server
 
   //bylo testowane
@@ -204,10 +250,11 @@ function personForGraph (personData) {
 
   var person = {
     id: personData.id,
-    name: personData.details.name,
+    name: personData.details.name + " " + personData.details.surname,
     class: personData.details.sex === 'Male'? "man": "woman",
     extra: {
-      id: personData.id
+      id: personData.id,
+      events: personData.details.events
     }
   };
   //console.log(personData, person.class);
@@ -253,9 +300,6 @@ function genTreeDataForPerson(persons, id){
     }
   }
 
-  treeData.extra = {
-    id: id
-  }
   
   return treeData;
 }
@@ -264,6 +308,7 @@ function nodeOnClick(name, extra){
 
   console.log("name: ", name);
   console.log("id: ", extra.id);
+  console.log("id: ", extra.events);
 
   localStorage.setItem('selectedPersonID', extra.id); 
   document.getElementById("cardHeader").innerHTML=name;

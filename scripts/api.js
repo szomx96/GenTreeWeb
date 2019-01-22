@@ -168,14 +168,14 @@ export function getPersonEvents(id) {
         .catch(error => console.error('Error:', error));
 }
 
-export function postPersonEvents(id, body) {
+export function postPersonEvent(id, body) {
 
-    var url = baseUrl + `persons/${id}/events`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/events`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -186,7 +186,11 @@ export function postPersonEvents(id, body) {
             return res.json()
         })
         .then(response => {
-            console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
+                return response;
+            } else {
+                return status;
+            }
         })
         .catch(error => console.error('Error:', error));
 }
@@ -275,12 +279,12 @@ export function getPersonRelations(id) {
 
 export function postPerson(idTree, body) {
 
-    var url = baseUrl + `persons/${idTree}/events`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/trees/${idTree}/persons`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -291,8 +295,7 @@ export function postPerson(idTree, body) {
             return res.json()
         })
         .then(response => {
-            if (status == 201) {
-                console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
                 return response;
             } else {
                 return status;
@@ -331,12 +334,12 @@ export function changePersonAvatar(idPerson, idAvatar) {
 
 export function postPersonRelations(body) {
 
-    var url = baseUrl + `persons/relations`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/relations`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -347,8 +350,7 @@ export function postPersonRelations(body) {
             return res.json()
         })
         .then(response => {
-            if (status == 201) {
-                console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
                 return response;
             } else {
                 return status;

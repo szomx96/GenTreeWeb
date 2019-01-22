@@ -62,14 +62,17 @@
                 <input id="personSurname" type="text" name="personSurname"  required>
 
                 <select name="personSex" id="personSex">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
 
                 <select name="relationType" id="relationType">
-                    <option value="male">Spouse</option>
-                    <option value="female">Child</option>
+                    <option value="Marriage">Spouse</option>
+                    <option value="Parent">Child</option>
                 </select>
+
+                <label for="birthDate"><b>Birth date:</b></label>
+                <input type="date" name="birthDate" id="birthDate" required/> 
 
                 <button id="addRelationButtonConfirm">Add</button>
 
@@ -77,16 +80,16 @@
 
             <div class="addRelation" id="addEvent">
 
-                <input type="date" name="eventDate" id="eventDate" /> <br><br>
+                <input type="date" name="eventDate" id="eventDate" required/> <br><br>
 
                 <select name="eventType" id="eventType">
-                    <option value="birth">Birth</option>
-                    <option value="death">Death</option>
-                    <option value="wedding">Wedding</option>
-                    <option value="divorce">Divorce</option>
+                    <option value="Birth">Birth</option>
+                    <option value="Death">Death</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Divorce">Divorce</option>
                 </select> <br><br>
 
-                <label for="description"><b>Description:</b></label>
+                <label for="eventDescription"><b>Description:</b></label>
                 <input id="eventDescription" type="text" name="eventDescription"  required> <br>
 
                 <button id="addEventButtonConfirm">Add</button>

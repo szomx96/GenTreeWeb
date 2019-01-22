@@ -6,40 +6,33 @@ document.addEventListener('DOMContentLoaded', function() {
   getUserInfo();
 }, false);
 
-document.getElementById("changeAvatar").addEventListener('click', function(){
-    updateAvatar();
-}, false);
 
 function getUserInfo(){
 
-    console.log(api.getUserAvatar(data.id));
-
-    api.getUserAvatar(data.id)
+    api.getAvatar(data.id)
     .then(response => {
-        console.log(response);
-        loadAvatar(response.content);
+        loadAvatar(response.url);
     });   
 }
 
-function loadAvatar(response){      
-    document.getElementById("avatar").src = `data:image/png;base64,${response}`;    
+function loadAvatar(url){        
+    document.getElementById("avatar").src = url;    
 }
 
-function updateAvatar(){
-    // var fileVal=document.getElementById("avatarInput");
-    // alert(fileVal.value);
-    // document.getElementById("avatar").src = fileVal;
+async function uploadAvatar(file) {
 
+    var fileInput = document.getElementById('avatarInput');
+    var file = fileInput.files[0];
+    var formData = new FormData();
+    formData.append("file", file);
+
+    var mediaID = await api.postMedia(formData).then(response => response.id);
+    var newAvatar = {
+        userId: data.id,
+        mediaId: mediaID
+    }
+    await api.addUserAvatar(newAvatar);
 }
-
-function uploadAvatar(body){
-    console.log("body:", body);
-    api.postMedia(body)
-            .then(response => {
-                console.log(response);
-            });
-}
-
 
 document.getElementById('avatarInput').onchange = function (evt) {
     var tgt = evt.target || window.event.srcElement,
@@ -48,7 +41,7 @@ document.getElementById('avatarInput').onchange = function (evt) {
     if (FileReader && files && files.length) {
         var fr = new FileReader();
         fr.onload = function () {
-            document.getElementById("avatar").src = fr.result;
+            document.getElementById("avatar").src = fr.result;            
             uploadAvatar(fr.result);
         }
         fr.readAsDataURL(files[0]);

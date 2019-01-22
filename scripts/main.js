@@ -198,65 +198,42 @@ function personForGraph (personData) {
 }
 
 //returns object TreeData for our library on d3 which i forgot the name of ;)
-function genTreeData(persons){
+function genTreeData(rawTreeData){
 
-  console.log("persons ktore dostaje tree data: ", persons);
+  console.log("persons ktore dostaje tree data: ", rawTreeData);
+  //teraz wygenerowac dla dzieci GŁOWY rodziny (koniecznie męskiej)
+  //let treeData = [personForGraph(rawTreeData[i])];
   
-  let treeData = [];
-  
-  console.log("persons length: ", persons.length);
 
-  for (var j = 0; j < 4 ; j++) {
-
-
-    treeData.push(personForGraph(persons[j])); //powinna byc najstarsza osoba, narazie zakladam ze jest to pierwszy element
-    treeData[j].marriages = [{}];
-    treeData[j].marriages[0].children = [];
-
- 
-    for (var i = 0; i < persons[j].relations.length; i++) { //powinno byc od osoby a nie od indeksu stalo ustalonego
-
-        switch (persons[j].relations[i].type) {
-          case "Marriage":
-            if(persons[j].details.sex === "Male"){
-            treeData[j].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[j].relations[i].secondPersonId)); 
-            }else{
-              treeData[j].marriages[0].spouse = personForGraph(persons.find(person => person.id === persons[j].relations[i].firstPersonId));
-            } //ale kuracheństwo ... co ty wiesz o kurachenstwie, update xDD :*
-            break;
-          case "Parent":
-              if(persons[j].id === persons[j].relations[i].firstPersonId){          
-              treeData[j].marriages[0].children[0] = personForGraph(persons.find(person => person.id === persons[j].relations[i].secondPersonId));
-          
-              }
-            break;
-        }
-      
-    }
- 
-  }
-  // for(var k=0;k<treeData.length;k++){
-  //   console.log(treeData[k]);
-  //   console.log(typeof treeData[k].marriages[0].spouse );
-  //   if(Object.keys(treeData[k].marriages[0].spouse).length > 0 ){
-      
-  //     console.log("w ifie kurwa jestem",treeData[k]);
-  //     var spouseId = treeData[k].marriages[0].spouse.id;
-  //     var spouse = treeData.find(chuj => chuj.id === spouseId);
-  //     //console.log(spouse);
-  //     spouse.marriages[0].spouse = {};
-     
-  //   }
-  //}
-  return treeData;
+  return [genTreeDataForPerson(rawTreeData,rawTreeData[0].id)];
 }
 
 function genTreeDataForPerson(persons, id){
   let treeData;
+  let person = persons.find(person => person.id === id);
+  console.log(`gentreedata wywolane dla`, person.details.name);
 
-  treeData = [personForGraph(persons.find(person => person.id === id))];
+  treeData = personForGraph(person);
+  treeData.marriages = [{}];
+  treeData.marriages[0].children = [];
+
+  for (var i = 0; i < person.relations.length; i++) { 
+    switch (person.relations[i].type) {
+      case "Marriage":
+        if(person.details.sex === "Male"){
+        treeData.marriages[0].spouse = personForGraph(persons.find(person1 => person1.id === person.relations[i].secondPersonId)); 
+        }else{
+        treeData.marriages[0].spouse = personForGraph(persons.find(person1 => person1.id === person.relations[i].firstPersonId));
+        }
+        break;
+      case "Parent":        
+         // treeData.marriages[0].children.push(personForGraph(persons.find(person1 => person1.id === person.relations[i].secondPersonId)));
+         treeData.marriages[0].children.push(genTreeDataForPerson(persons,person.relations[i].secondPersonId));
+
+        break;
+    }
+  }
   return treeData;
-
 }
 
 function nodeOnClick(name, extra){

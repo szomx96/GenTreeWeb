@@ -33,20 +33,22 @@ export function postMedia(body) {
     var url = "https://gentreeappapi.azurewebsites.net/api/media";
 
     return fetch(url, {
-        mode: 'no-cors',
+
         method: 'POST',
         body: body
         
     }).then(res => {
-        status = res.status; return res.json()
-    }).then(response => {
-        console.log('Success:', JSON.stringify(response));
+        status = res.status;
+        return res.json();
+    })
+    .then(response => {
         if (status == 200) {
-            return response.id;
+            return response;
         } else {
             return status;
         }
-    }).catch(error => console.error('Error:', error));
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 export function person(id, method) { //GET, DELETE
@@ -531,12 +533,12 @@ export function getUserAvatar(id) {
 
 export function addUserAvatar(body) {
 
-    var url = baseUrl + `users/avatar`;
+    var url = 'https://gentreeappapi.azurewebsites.net/api/users/avatar';
     var status;
 
     fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`,

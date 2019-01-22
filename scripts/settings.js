@@ -6,17 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
   getUserInfo();
 }, false);
 
-document.getElementById("changeAvatar").addEventListener('click', function(){
-    updateAvatar();
-}, false);
 
 function getUserInfo(){
 
-    console.log(api.getAvatar(data.id));
-
     api.getAvatar(data.id)
     .then(response => {
-        console.log(response);
         loadAvatar(response.url);
     });   
 }
@@ -25,18 +19,20 @@ function loadAvatar(url){
     document.getElementById("avatar").src = url;    
 }
 
+async function uploadAvatar(file) {
 
-function uploadAvatar(file){
-
+    var fileInput = document.getElementById('avatarInput');
+    var file = fileInput.files[0];
     var formData = new FormData();
-    formData.append("filename", file);
-    
-    api.postMedia(formData)
-            .then(response => {
-                console.log(response);
-            });
-}
+    formData.append("file", file);
 
+    var mediaID = await api.postMedia(formData).then(response => response.id);
+    var newAvatar = {
+        userId: data.id,
+        mediaId: mediaID
+    }
+    await api.addUserAvatar(newAvatar);
+}
 
 document.getElementById('avatarInput').onchange = function (evt) {
     var tgt = evt.target || window.event.srcElement,
@@ -45,10 +41,7 @@ document.getElementById('avatarInput').onchange = function (evt) {
     if (FileReader && files && files.length) {
         var fr = new FileReader();
         fr.onload = function () {
-            document.getElementById("avatar").src = fr.result;
-
-            console.log(fr.result);
-            
+            document.getElementById("avatar").src = fr.result;            
             uploadAvatar(fr.result);
         }
         fr.readAsDataURL(files[0]);

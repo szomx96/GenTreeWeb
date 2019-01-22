@@ -12,29 +12,26 @@ document.getElementById("changeAvatar").addEventListener('click', function(){
 
 function getUserInfo(){
 
-    console.log(api.getUserAvatar(data.id));
+    console.log(api.getAvatar(data.id));
 
-    api.getUserAvatar(data.id)
+    api.getAvatar(data.id)
     .then(response => {
         console.log(response);
-        loadAvatar(response.content);
+        loadAvatar(response.url);
     });   
 }
 
-function loadAvatar(response){      
-    document.getElementById("avatar").src = `data:image/png;base64,${response}`;    
+function loadAvatar(url){        
+    document.getElementById("avatar").src = url;    
 }
 
-function updateAvatar(){
-    // var fileVal=document.getElementById("avatarInput");
-    // alert(fileVal.value);
-    // document.getElementById("avatar").src = fileVal;
 
-}
+function uploadAvatar(file){
 
-function uploadAvatar(body){
-    console.log("body:", body);
-    api.postMedia(body)
+    var formData = new FormData();
+    formData.append("filename", file);
+    
+    api.postMedia(formData)
             .then(response => {
                 console.log(response);
             });
@@ -49,6 +46,9 @@ document.getElementById('avatarInput').onchange = function (evt) {
         var fr = new FileReader();
         fr.onload = function () {
             document.getElementById("avatar").src = fr.result;
+
+            console.log(fr.result);
+            
             uploadAvatar(fr.result);
         }
         fr.readAsDataURL(files[0]);

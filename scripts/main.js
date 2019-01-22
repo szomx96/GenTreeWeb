@@ -202,10 +202,10 @@ function genTreeData(rawTreeData){
 
   console.log("persons ktore dostaje tree data: ", rawTreeData);
   //teraz wygenerowac dla dzieci GŁOWY rodziny (koniecznie męskiej)
-  //let treeData = [personForGraph(rawTreeData[i])];
-  
+  let treeData = [genTreeDataForPerson(rawTreeData,rawTreeData[0].id)];
+  console.log(JSON.stringify(treeData));
 
-  return [genTreeDataForPerson(rawTreeData,rawTreeData[0].id)];
+  return treeData;
 }
 
 function genTreeDataForPerson(persons, id){
@@ -215,6 +215,7 @@ function genTreeDataForPerson(persons, id){
 
   treeData = personForGraph(person);
   treeData.marriages = [{}];
+  treeData.marriages[0].spouse = {};
   treeData.marriages[0].children = [];
 
   for (var i = 0; i < person.relations.length; i++) { 
@@ -227,7 +228,7 @@ function genTreeDataForPerson(persons, id){
         }
         break;
       case "Parent":        
-         // treeData.marriages[0].children.push(personForGraph(persons.find(person1 => person1.id === person.relations[i].secondPersonId)));
+         //treeData.marriages[0].children.push(personForGraph(persons.find(person1 => person1.id === person.relations[i].secondPersonId)));
          treeData.marriages[0].children.push(genTreeDataForPerson(persons,person.relations[i].secondPersonId));
 
         break;
@@ -241,3 +242,4 @@ function nodeOnClick(name, extra){
   document.getElementById("cardHeader").innerHTML=name;
   
 }
+

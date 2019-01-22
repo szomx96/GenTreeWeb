@@ -7,6 +7,7 @@ class TreeData {
 
 var rawTree;
 var data = JSON.parse(localStorage.getItem('sessionData'));
+var chosenTree = localStorage.getItem('chosenTree');
 var treeData;
 var treePersons = {};
 
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   //loadTree();
   // loadJSON(init(drawTree)); po co to? xD
   // rawTree = await loadRawTree();
+  localStorage.setItem('selectedPersonID', 0);
   drawTree();
 }, false);
 
@@ -46,7 +48,7 @@ document.getElementById("addRelationButton").addEventListener("click", function(
   event.stopPropagation();
   document.getElementById("addRelation").style.visibility = "visible";
   var posX = event.clientX + "px";
-  var posY = event.clientY - 80 + "px"; //to nie po bozemu, trzeba naprawic, SAMA SE KURWA NAPRAW
+  var posY = event.clientY - 80 + "px";
   document.getElementById("addRelation").style.margin = posY + " 0px 0px " + posX;
 
 }, false);
@@ -100,13 +102,20 @@ document.getElementById("addMediaButtonConfirm").addEventListener("click", funct
 //loads tree Data from the server nad returns treeData ready for drawing library
  async function loadTree(){ //should be given id of the tree in the argument
 
-  let idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
+  if(chosenTree !== "empty"){ //z jakiegos powodu z nullem nie dzialalo xdd
+    var idOfFirstTree = chosenTree;
+    localStorage.chosenTree = "empty";
+  }else{
+    console.log("czy chosen tree to null? ", localStorage.chosenTree);
+    var idOfFirstTree = await api.getUserTrees(data.id).then(response =>response[0].id);
+  }
   let rawTree = await api.getPersonsFromTree(idOfFirstTree); //raw data from server
 
   //bylo testowane
   //let rawTree = await api.getPersonsFromTree("8e49f432-ca94-4ca9-b7a0-08d678d8e1a9");
 
   console.log("raw tree (from server): ", rawTree);
+ 
 
   let treeData = genTreeData(rawTree);   //transforms tree data into the one compatible with our lib
   // let treeData = genTreeDataForPerson(rawTree, rawTree[0].id);
@@ -160,6 +169,11 @@ function drawTree() {
       width: 1200,
       callbacks: {
         nodeClick: (name, extra) => {nodeOnClick(name, extra)},
+        // function(name, extra, innerIdOfTheNode) {
+          //console.log("name: " + name);
+          //console.log("id: " + extra.id);
+          //console.log(name); nodeOnClick(name, x, y, height, width, extra, id, nodeClass, textClass, textRenderer)
+        //},
         textRenderer: function (name, extra, textClass) {
           // THis callback is optinal but can be used to customize
           // how the text is rendered without having to rewrite the entire node
@@ -192,6 +206,9 @@ function personForGraph (personData) {
     id: personData.id,
     name: personData.details.name,
     class: personData.details.sex === 'Male'? "man": "woman",
+    extra: {
+      id: personData.id
+    }
   };
   //console.log(personData, person.class);
   return person;
@@ -223,7 +240,8 @@ function genTreeDataForPerson(persons, id){
       case "Marriage":
         if(person.details.sex === "Male"){
         treeData.marriages[0].spouse = personForGraph(persons.find(person1 => person1.id === person.relations[i].secondPersonId)); 
-        }else{
+        }
+        else{
         treeData.marriages[0].spouse = personForGraph(persons.find(person1 => person1.id === person.relations[i].firstPersonId));
         }
         break;
@@ -234,11 +252,20 @@ function genTreeDataForPerson(persons, id){
         break;
     }
   }
+
+  treeData.extra = {
+    id: id
+  }
+  
   return treeData;
 }
 
 function nodeOnClick(name, extra){
 
+  console.log("name: ", name);
+  console.log("id: ", extra.id);
+
+  localStorage.setItem('selectedPersonID', extra.id); 
   document.getElementById("cardHeader").innerHTML=name;
   
 }

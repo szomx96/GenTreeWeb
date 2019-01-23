@@ -80,70 +80,71 @@ export function person(id, method) { //GET, DELETE
 
 export function getPersonMedia(id) {
 
-    var url = baseUrl + `persons/${id}/media`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
         }
     })
-        .then(res => {
-            status = res.status;
-            return res.json()
-        })
-        .then(response => {
-            console.log('Success:', JSON.stringify(response));
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-export function postPersonMedia(id, body) {
-
-    var status;
-    var url = baseUrl + `persons/${id}/media`;
-
-    fetch(url, {
-        method: 'POST',
-        body: body,
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${data.token}`
-        }
-    }).then(res => {
-        status = res.status; return res.json()
-    }).then(response => {
-        console.log('Success:', JSON.stringify(response));
+    .then(res => {
+        status = res.status;
+        return res.json();
+    })
+    .then(response => {
         if (status == 200) {
             return response;
         } else {
             return status;
         }
-    }).catch(error => console.error('Error:', error));
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+export function postPersonMedia(id, body) {
+
+    var status;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media`;
+
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
+        }
+    }).then(res => {
+        status = res.status;
+        return res.json()
+    })
+    .then(response => {
+        console.log('Success:', JSON.stringify(response));
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 export function getPersonAvatar(id) {
 
-    var url = baseUrl + `persons/${id}/media/avatar`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media/avatar`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
         }
+    }) .then(res => {
+        if (res.ok){
+            return res.json();
+        }
+        else {
+            Promise.reject(new Error(`Error code: ${res.status}`));
+        }
     })
-        .then(res => {
-            status = res.status;
-            return res.json()
-        })
-        .then(response => {
-            console.log('Success:', JSON.stringify(response));
-        })
-        .catch(error => console.error('Error:', error));
 }
 
 export function getPersonEvents(id) {

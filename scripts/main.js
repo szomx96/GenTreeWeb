@@ -19,6 +19,24 @@ document.addEventListener('DOMContentLoaded', async function() {
   drawTree();
 }, false);
 
+
+
+async function uploadMedia() {
+
+  var fileInput = document.getElementById('addMediaInput');
+  var file = fileInput.files[0];
+  var formData = new FormData();
+  formData.append("file", file);
+  console.log(file);
+  var mediaID = await api.postMedia(formData).then(response => response.id);
+  console.log(mediaID);
+  var newMedia = {
+     mediaId: mediaID
+  }
+ await api.postPersonMedia(localStorage.selectedPersonID,newMedia);
+  //pokazac media na teutadesa
+}
+
 document.addEventListener("click", function(){
   if (document.getElementById("addRelation").style.visibility === "visible") {
     document.getElementById("addRelation").style.visibility = "hidden";
@@ -29,7 +47,34 @@ document.addEventListener("click", function(){
   if (document.getElementById("addMedia").style.visibility === "visible") {
     document.getElementById("addMedia").style.visibility = "hidden";
   }
+  if (document.getElementById("gallery").style.visibility === "visible") {
+    document.getElementById("gallery").style.visibility = "hidden";
+    document.getElementById("gallery").innerHTML = "";    
+  }
 });
+
+document.getElementById("showGallery").addEventListener("click", async function(event){ //nie chowa okienka po kliknieciu na div z dodawniem relacji
+  event.stopPropagation();
+  
+  var div = document.getElementById("gallery");
+  div.style.margin = "0px 0px 0px 300px";
+  div.style.visibility = "visible";
+  var personMedia = await api.getPersonMedia(localStorage.selectedPersonID);
+  console.log(personMedia);
+  personMedia.forEach(element => {
+    let newPicture = document.createElement("a");
+   
+    //newPicture.href = element.url;
+    let img = document.createElement("img");
+    img.src = element.url;
+    // img.style.width = "100px";
+    // img.style.height = "100px";
+    // img.style.margin = "5px";
+    newPicture.appendChild(img);
+    div.appendChild(newPicture);
+  });
+  
+}, false);
 
 document.getElementById("addRelation").addEventListener("click", function(event){ //nie chowa okienka po kliknieciu na div z dodawniem relacji
   event.stopPropagation();
@@ -140,6 +185,7 @@ document.getElementById("addEventButtonConfirm").addEventListener("click", funct
 
 document.getElementById("addMediaButtonConfirm").addEventListener("click", function(event) {
   //wyslac na serwer
+  uploadMedia()
   document.getElementById("addMedia").style.visibility = "hidden";
 }, false);
 
@@ -203,6 +249,7 @@ async function init(callback) {
   console.log("tree data w init: ", treeData);
   callback(treeData);
 
+
 }
 
 function drawTree() {
@@ -263,11 +310,7 @@ function personForGraph (personData) {
 
 //returns object TreeData for our library on d3 which i forgot the name of ;)
 function genTreeData(rawTreeData){
-
-  console.log("persons ktore dostaje tree data: ", rawTreeData);
-  //teraz wygenerowac dla dzieci GŁOWY rodziny (koniecznie męskiej)
   let treeData = [genTreeDataForPerson(rawTreeData,rawTreeData[0].id)];
-  console.log(JSON.stringify(treeData));
 
   return treeData;
 }
@@ -275,7 +318,6 @@ function genTreeData(rawTreeData){
 function genTreeDataForPerson(persons, id){
   let treeData;
   let person = persons.find(person => person.id === id);
-  console.log(`gentreedata wywolane dla`, person.details.name);
 
   treeData = personForGraph(person);
   treeData.marriages = [{}];
@@ -304,11 +346,15 @@ function genTreeDataForPerson(persons, id){
   return treeData;
 }
 
-function nodeOnClick(name, extra){
+async function nodeOnClick(name, extra){
 
-  console.log("name: ", name);
-  console.log("id: ", extra.id);
-  console.log("id: ", extra.events);
+  document.getElementById("cardImageDiv").style.visibility = "visible";
+  
+   await api.getPersonAvatar(extra.id).then(response=>{
+    document.getElementById('cardImage').src  = response.url;
+   }).catch(error=>{
+    document.getElementById('cardImage').src  = "./img/unknown.jpg";
+   });
 
   localStorage.setItem('selectedPersonID', extra.id); 
   document.getElementById("cardHeader").innerHTML=name;

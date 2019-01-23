@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="./semantic/semantic.css">
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/style_tree.css">
+    <link rel="stylesheet" href="simplelightbox/dist/simplelightbox.css">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
     <script src="https://cdn.rawgit.com/ErikGartner/dTree/2.0.2/dist/dTree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="simplelightbox/dist/simple-lightbox.js"></script>
    
 </head>
 
@@ -28,7 +31,7 @@
 
         <div class="row">
             <div class="side">
-                <div class="cardimage">
+                <div class="cardimage" id="cardImageDiv">
 
                     <div class="ui card" id="card">
                             <div class="image" >
@@ -47,10 +50,17 @@
                                <button id="addRelationButton">Add relation</button>    
                                <button id="addEventButton">Add event</button>
                                <button id="addMediaButton">Add media</button>
-                               <button id="deletePersonButton">Delete person</button>                                                                                              
+                               <button id="deletePersonButton">Delete person</button>
+                               <button id="showGallery">Show gallery</button>                                                                                              
                             </div>
                         </div> 
                 </div>            
+            </div>
+
+            <div id="gallery" class="gallery">
+                
+                <div class="clear"></div>
+    
             </div>
 
             <div class="addRelation" id="addRelation">

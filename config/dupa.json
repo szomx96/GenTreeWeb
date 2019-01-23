@@ -1,0 +1,30 @@
+[
+    {
+        "id": "2b4db610-bd03-4dd2-8e36-08d674a9b8bb",
+        "name": "Janusz",
+        "class": "man",
+        "marriages": [
+            {
+                "children": [
+                    {},
+                    [],
+                    {
+                        "id": "0da04644-746c-49b7-5dfe-08d67affc26c",
+                        "name": "Ania",
+                        "class": "woman"
+                    },
+                    {
+                        "id": "8aea6abe-bd3f-4a13-fc6e-08d6807d82ac",
+                        "name": "Oskar",
+                        "class": "man"
+                    }
+                ],
+                "spouse": {
+                    "id": "50d5bea0-8a7f-48c0-3dcd-08d67afe907f",
+                    "name": "Grażyna",
+                    "class": "woman"
+                }
+            }
+        ]
+    }
+]

@@ -1,48 +1,68 @@
-[{
-    "name": "Niclas Superlongsurname",
+[
+  {
+    "id": "2b4db610-bd03-4dd2-8e36-08d674a9b8bb",
+    "name": "Janusz",
     "class": "man",
-    "marriages": [{
-      "spouse": {
-        "name": "Iliana",
-        "class": "woman",
-        "extra": {
-            "nickname": "Illi"
-        }
-      },
-      "children": [{
-        "name": "James",
-        "class": "man",
-        "marriages": [{
-          "spouse": {
-            "name": "Alexandra",
-            "class": "woman"
-          },
-          "children": [{
-            "name": "Eric",
-            "class": "man",
-            "marriages": [{
-              "spouse": {
-                "name": "Eva",
-                "class": "woman"
+    "marriages": [
+      {
+        "spouse": {
+          "id": "50d5bea0-8a7f-48c0-3dcd-08d67afe907f",
+          "name": "Grażyna",
+          "class": "woman"
+        },
+        "children": [
+          {
+            "id": "0da04644-746c-49b7-5dfe-08d67affc26c",
+            "name": "Ania",
+            "class": "woman",
+            "marriages": [
+              {
+                "spouse": {
+                  "id": "616f893d-293a-4f11-10e9-08d67fb65a4d",
+                  "name": "Mokebe",
+                  "class": "man"
+                },
+                "children": [
+                  {
+                    "id": "09e9edb3-3b90-4cf7-10ea-08d67fb65a4d",
+                    "name": "Brian",
+                    "class": "man",
+                    "marriages": [
+                      {
+                        "spouse": {},
+                        "children": []
+                      }
+                    ],
+                    "extra": {
+                      "id": "09e9edb3-3b90-4cf7-10ea-08d67fb65a4d"
+                    }
+                  }
+                ]
               }
-            }]
-          }, {
-            "name": "Jane",
-            "class": "woman"
-          }, {
-            "name": "Jasper",
-            "class": "man"
-          }, {
-            "name": "Emma",
-            "class": "woman"
-          }, {
-            "name": "Julia",
-            "class": "woman"
-          }, {
-            "name": "Jessica",
-            "class": "woman"
-          }]
-        }]
-      }]
-    }]
-  }]
+            ],
+            "extra": {
+              "id": "0da04644-746c-49b7-5dfe-08d67affc26c"
+            }
+          },
+          {
+            "id": "8aea6abe-bd3f-4a13-fc6e-08d6807d82ac",
+            "name": "Oskar",
+            "class": "man",
+            "marriages": [
+              {
+                "spouse": {},
+                "children": []
+              }
+            ],
+            "extra": {
+              "id": "8aea6abe-bd3f-4a13-fc6e-08d6807d82ac"
+            }
+          }
+        ]
+      }
+    ],
+    "extra": {
+      "id": "2b4db610-bd03-4dd2-8e36-08d674a9b8bb"
+    }
+  }
+]

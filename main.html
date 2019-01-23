@@ -9,9 +9,12 @@
     <link rel="stylesheet" href="./semantic/semantic.css">
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/style_tree.css">
+    <link rel="stylesheet" href="simplelightbox/dist/simplelightbox.css">
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
     <script src="https://cdn.rawgit.com/ErikGartner/dTree/2.0.2/dist/dTree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="simplelightbox/dist/simple-lightbox.js"></script>
    
 </head>
 
@@ -28,7 +31,7 @@
 
         <div class="row">
             <div class="side">
-                <div class="cardimage">
+                <div class="cardimage" id="cardImageDiv">
 
                     <div class="ui card" id="card">
                             <div class="image" >
@@ -47,10 +50,17 @@
                                <button id="addRelationButton">Add relation</button>    
                                <button id="addEventButton">Add event</button>
                                <button id="addMediaButton">Add media</button>
-                               <button id="deletePersonButton">Delete person</button>                                                                                              
+                               <button id="deletePersonButton">Delete person</button>
+                               <button id="showGallery">Show gallery</button>                                                                                              
                             </div>
                         </div> 
                 </div>            
+            </div>
+
+            <div id="gallery" class="gallery">
+                
+                <div class="clear"></div>
+    
             </div>
 
             <div class="addRelation" id="addRelation">
@@ -62,14 +72,17 @@
                 <input id="personSurname" type="text" name="personSurname"  required>
 
                 <select name="personSex" id="personSex">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
 
                 <select name="relationType" id="relationType">
-                    <option value="male">Spouse</option>
-                    <option value="female">Child</option>
+                    <option value="Marriage">Spouse</option>
+                    <option value="Parent">Child</option>
                 </select>
+
+                <label for="birthDate"><b>Birth date:</b></label>
+                <input type="date" name="birthDate" id="birthDate" required/> 
 
                 <button id="addRelationButtonConfirm">Add</button>
 
@@ -77,16 +90,16 @@
 
             <div class="addRelation" id="addEvent">
 
-                <input type="date" name="eventDate" id="eventDate" /> <br><br>
+                <input type="date" name="eventDate" id="eventDate" required/> <br><br>
 
                 <select name="eventType" id="eventType">
-                    <option value="birth">Birth</option>
-                    <option value="death">Death</option>
-                    <option value="wedding">Wedding</option>
-                    <option value="divorce">Divorce</option>
+                    <option value="Birth">Birth</option>
+                    <option value="Death">Death</option>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Divorce">Divorce</option>
                 </select> <br><br>
 
-                <label for="description"><b>Description:</b></label>
+                <label for="eventDescription"><b>Description:</b></label>
                 <input id="eventDescription" type="text" name="eventDescription"  required> <br>
 
                 <button id="addEventButtonConfirm">Add</button>

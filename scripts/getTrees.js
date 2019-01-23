@@ -41,7 +41,8 @@ function displayList() {
 function showSelectedTree(i, res) {
   return function() {
       console.log("you clicked region number " + i);
-      console.log(res[i].id);
-      //przekierowanie do maina i wyswietlenie drzewa z tym id
+      localStorage.setItem('chosenTree', res[i].id);
+      console.log("local storage chosen: " ,localStorage.chosenTree);
+      location.replace("./main.html");    
   };
 }

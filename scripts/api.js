@@ -33,22 +33,22 @@ export function postMedia(body) {
     var url = "https://gentreeappapi.azurewebsites.net/api/media";
 
     return fetch(url, {
+
         method: 'POST',
-        body: body,
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${data.token}`
-        }
+        body: body
+        
     }).then(res => {
-        status = res.status; return res.json()
-    }).then(response => {
-        console.log('Success:', JSON.stringify(response));
+        status = res.status;
+        return res.json();
+    })
+    .then(response => {
         if (status == 200) {
-            return response.id;
+            return response;
         } else {
             return status;
         }
-    }).catch(error => console.error('Error:', error));
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 export function person(id, method) { //GET, DELETE
@@ -80,70 +80,71 @@ export function person(id, method) { //GET, DELETE
 
 export function getPersonMedia(id) {
 
-    var url = baseUrl + `persons/${id}/media`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
         }
     })
-        .then(res => {
-            status = res.status;
-            return res.json()
-        })
-        .then(response => {
-            console.log('Success:', JSON.stringify(response));
-        })
-        .catch(error => console.error('Error:', error));
-}
-
-export function postPersonMedia(id, body) {
-
-    var status;
-    var url = baseUrl + `persons/${id}/media`;
-
-    fetch(url, {
-        method: 'POST',
-        body: body,
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${data.token}`
-        }
-    }).then(res => {
-        status = res.status; return res.json()
-    }).then(response => {
-        console.log('Success:', JSON.stringify(response));
+    .then(res => {
+        status = res.status;
+        return res.json();
+    })
+    .then(response => {
         if (status == 200) {
             return response;
         } else {
             return status;
         }
-    }).catch(error => console.error('Error:', error));
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+export function postPersonMedia(id, body) {
+
+    var status;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media`;
+
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
+        }
+    }).then(res => {
+        status = res.status;
+        return res.json()
+    })
+    .then(response => {
+        console.log('Success:', JSON.stringify(response));
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 export function getPersonAvatar(id) {
 
-    var url = baseUrl + `persons/${id}/media/avatar`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/media/avatar`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
         }
+    }) .then(res => {
+        if (res.ok){
+            return res.json();
+        }
+        else {
+            Promise.reject(new Error(`Error code: ${res.status}`));
+        }
     })
-        .then(res => {
-            status = res.status;
-            return res.json()
-        })
-        .then(response => {
-            console.log('Success:', JSON.stringify(response));
-        })
-        .catch(error => console.error('Error:', error));
 }
 
 export function getPersonEvents(id) {
@@ -168,14 +169,14 @@ export function getPersonEvents(id) {
         .catch(error => console.error('Error:', error));
 }
 
-export function postPersonEvents(id, body) {
+export function postPersonEvent(id, body) {
 
-    var url = baseUrl + `persons/${id}/events`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/${id}/events`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -186,7 +187,11 @@ export function postPersonEvents(id, body) {
             return res.json()
         })
         .then(response => {
-            console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
+                return response;
+            } else {
+                return status;
+            }
         })
         .catch(error => console.error('Error:', error));
 }
@@ -275,12 +280,12 @@ export function getPersonRelations(id) {
 
 export function postPerson(idTree, body) {
 
-    var url = baseUrl + `persons/${idTree}/events`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/trees/${idTree}/persons`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -291,8 +296,7 @@ export function postPerson(idTree, body) {
             return res.json()
         })
         .then(response => {
-            if (status == 201) {
-                console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
                 return response;
             } else {
                 return status;
@@ -331,12 +335,12 @@ export function changePersonAvatar(idPerson, idAvatar) {
 
 export function postPersonRelations(body) {
 
-    var url = baseUrl + `persons/relations`;
+    var url = `https://gentreeappapi.azurewebsites.net/api/persons/relations`;
     var status;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`
@@ -347,8 +351,7 @@ export function postPersonRelations(body) {
             return res.json()
         })
         .then(response => {
-            if (status == 201) {
-                console.log('Success:', JSON.stringify(response));
+            if (status == 200) {
                 return response;
             } else {
                 return status;
@@ -460,7 +463,7 @@ export function getUserTrees(id) {
 
 export function getPersonsFromTree(id) {
 
-    var url = baseUrl + `trees/${id}/persons`;
+    var url = baseUrl + `trees/${id}/persons/oldest`; //oldest łatka, do przepisania
     var status;
 
     return fetch(url, {
@@ -533,12 +536,12 @@ export function getUserAvatar(id) {
 
 export function addUserAvatar(body) {
 
-    var url = baseUrl + `users/avatar`;
+    var url = 'https://gentreeappapi.azurewebsites.net/api/users/avatar';
     var status;
 
     fetch(url, {
         method: 'POST',
-        body: body,
+        body: JSON.stringify(body),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`,
@@ -583,4 +586,31 @@ export function postLogin(name, password) {
                 Promise.reject(new Error(`Error code: ${res.status}`));
             }
         })
+}
+
+export function getAvatar(id) {
+
+    var url = `https://gentreeappapi.azurewebsites.net/api/Users/${id}/avatar`;
+    var status;
+
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${data.token}`
+        }
+    })
+        .then(res => {
+            status = res.status;
+            return res.json()
+        })
+        .then(response => {
+            if (status == 200) {
+                console.log('Success:', JSON.stringify(response));
+                return response;
+            } else {
+                return status;
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }

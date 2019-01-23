@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>GenTreeApp</title>
+    
+    <link rel="stylesheet" href="./style/style.css">
+   
+</head>
+
+<body>
+        
+
+        <div class="info">
+            <h2>Logged as: <i id=usernameText>default</i> </h2>
+        </div>
+
+        <div class="row">
+
+            
+
+            <div class="main">
+
+                <div class="addNewTree" id="addNewTree">
+
+                        <label for="treeName"><b>TreeName:</b></label>
+                        <input id="treeName" type="text" name="treenName"  required>
+
+                        <label for="personName"><b>Name:</b></label>
+                        <input id="personName" type="text" name="personName"  required>
+        
+                        <label for="surname"><b>Surname:</b></label>
+                        <input id="personSurname" type="text" name="personSurname"  required>
+        
+                        <select name="personSex" id="personSex">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+        
+        
+                        <label for="birthDate"><b>Birth date:</b></label>
+                        <input type="date" name="birthDate" id="birthDate" required/> 
+        
+                        <button id="addNewTreeButton">Add</button>
+        
+                    </div>
+                </div>
+        </div>
+
+    
+
+        <script src="./scripts/addNewTree.js" type="module"></script>
+</body>
+
+</html>

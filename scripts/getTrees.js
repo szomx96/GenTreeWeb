@@ -14,7 +14,7 @@ function displayList() {
     .then(response => {
       console.log('display:', response);
       res = response;
-      var length = Object.keys(response[0]).length;
+      var length = Object.keys(response[0]).length; 
       return length;
 
     }).then(length => {

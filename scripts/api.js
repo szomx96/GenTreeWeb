@@ -10,7 +10,7 @@ export function media(id, method) { //GET, DELETE
         method: method.toUpperCase(),
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${data.token}`
+            'Authorization': `Bearer ${data.token}` 
         }
     })
         .then(res => {

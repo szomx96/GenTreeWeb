@@ -10,5 +10,5 @@ document.getElementById("home").addEventListener("click", function() {
   }, false);
 
   document.getElementById("settings").addEventListener("click", function() {
-    location.replace("./settings.html");
+    location.replace("./settings.html"); 
   }, false);

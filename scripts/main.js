@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   // loadJSON(init(drawTree)); po co to? xD
   // rawTree = await loadRawTree();
   localStorage.setItem('selectedPersonID', 0);
-  drawTree();
+  drawTree(); 
 }, false);
 
 

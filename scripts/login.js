@@ -13,7 +13,7 @@ function sendLogin() {
 let status;
 
     api.postLogin(document.getElementById("name").value, document.getElementById("password").value) //no fajna abstrakcja, czy to ten no, boilerplate?
-        .then(response => {
+        .then(response => { 
             console.log('Success:', JSON.stringify(response));
                 
                 localStorage.setItem('sessionData', JSON.stringify(response));

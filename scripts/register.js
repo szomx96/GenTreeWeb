@@ -9,7 +9,7 @@ document.getElementById("registerButton").addEventListener("click", function() {
     }else{
         document.getElementById("infoLabel").innerHTML = "Passwords do not match";
     }
-}, false);
+}, false); 
 
 
 function createUser(name, password){

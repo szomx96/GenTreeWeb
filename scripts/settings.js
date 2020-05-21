@@ -11,7 +11,7 @@ function getUserInfo(){
 
     api.getAvatar(data.id)
     .then(response => {
-        loadAvatar(response.url);
+        loadAvatar(response.url); 
     });   
 }
 
